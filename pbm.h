@@ -6,7 +6,7 @@ typedef struct
 void afficherImageStatique(){
     int n;
     srand(time(NULL));
-    n = rand() % 3+1;
+    n = rand() % 5+1;
     switch(n){
         case 1 :
             chargerImage(im1);
