@@ -3,7 +3,7 @@
 
 #include <termios.h>
 #include <unistd.h>
-#include <stdio>
+#include <stdio.h>
 
 int commandeClavier(void){
     struct termios ancienTerm, nouveauTerm;
