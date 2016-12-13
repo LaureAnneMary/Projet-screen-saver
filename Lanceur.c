@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include <unistd.h>
+#include <historique.h>
 int  processusfils(){
         int n;
         srand(time(NULL));
@@ -25,28 +26,9 @@ int  processusfils(){
 	return n;
 }
 
-void sauvegarde(int n){
-	FILE* fichier = NULL;
-	time_t secondes;
-	struct tm instant;
-	fichier=fopen("historique.txt","w");
-	if(fichier!=NULL){
-	fprintf(fichier,"%d/%d/%d  %d:%d:%d, %d",instant.tm_mday, instant.tm_mon+1,instant.tm_year,instant.tm_hour, instant.tm_min, instant.tm_sec, n); 
-	}
-	fclose(fichier);
-}
-void afficherhistorique(){
-	FILE* fichier=NULL;
-	char texte[7]="";
-	fichier=fopen("historique.txt","r");
-	if(fichier!=NULL){
-		fscanf(fichier,"%d %d %d %d %d %d %d", %texte[0], %texte[1], %texte[2], %texte[3], %texte[4], %texte[5], %texte[6]);
-		printf("%d/%d/%d  %d:%d:%d, %d",texte[0],texte[1],texte[2],texte[3],texte[4],texte[5],texte[6]);
-	}
-	fclose(fichier);
-}
 void main(){
 	//lance la veille
+	system("clear");
 	int n;
 	int pid=fork();
 	switch(pid){
