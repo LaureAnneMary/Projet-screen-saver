@@ -13,7 +13,7 @@ int commandeClavier(void){
     nouveauTerm.c_lflag &= ~ICANON;// on passe le terminal en mode canonique
     nouveauTerm.c_lflag &= ~ECHO; // on passe le terminal en mode non-echo
     tcsetattr(STDIN_FILENO, TCSANOW, &nouveauTerm); // on met en place les nouvelles infos du terminal
-    ch = getchar(); // getchar() permet de lire une touche du clavier
+    touche = getchar(); // getchar() permet de lire une touche du clavier
     tcsetattr(STDIN_FILENO, TCSANOW, &ancienTerm); // on met en place les infos dans l'ancien terminal
     return touche; // la fonction renvoie la touche appuyée sur le clavier
 }
