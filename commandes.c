@@ -5,9 +5,9 @@
 
 int main()
 {
-    int system(const char* command)
-    touche = commandeClavier();
+    int touche;
     while(1){
+        touche = commandeClavier();
         if(touche == 32){ // 3 : touche espace
             printf("C'est la touche %d \n", touche);
         } else if(touche == 24 ){ //24 : flèche du haut
