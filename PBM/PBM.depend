@@ -1,0 +1,16 @@
+# depslib dependency file v1.0
+1481634832 source:/home/vincent/projetSS/PBM/main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<time.h>
+	<unistd.h>
+	"PBM.h"
+
+1481634832 /home/vincent/projetSS/PBM/PBM.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<time.h>
+	<unistd.h>
+
