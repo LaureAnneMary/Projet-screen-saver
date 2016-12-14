@@ -4,39 +4,29 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <time.h>
-typedef struct Historique Historique;
-struct Historique{
-        struct tm instant;
-        int typeEcran;
-        char nomImage;
-        int hauteur;
-        int longueur;
-        int positionX;
-        int positionY;
-        };
 
-void sauvegarde(int n ){
-        Historique historique;
-        historique.typeEcran=n;
-        time_t seconde;
-        time(&seconde);
-        historique.instant = *localtime(&seconde);
-         FILE* fichier = NULL;
-        fichier=fopen("historique.txt","w");
+void sauvegarde(int n, char* argument){
+      	int typeEcran=n;// La variable obtient le type d'ecran de veille 1, 2 ou 3
+        time_t maintenant=time(NULL);//avoir l'heure
+        struct tm tm_maintenant=*localtime(&maintenant);/// avoir l'heure locale
+	char s_maintenant[sizeof "HH:MM:SS"];//stocker l'heure dans un tableau
+	strftime(s_maintenant, sizeof s_maintenant,"%H:%M:%S",&tm_maintenant);
+         FILE* fichier = NULL;//initaialisation d'un pointeur a null
+        fichier=fopen("historique.txt","w");//ouverture ou creation si il n'existe pas d'un fichier texte historique
         if(fichier!=NULL){
-                fprintf(fichier,"%d/%d/%d  %d:%d:%d",instant.tm_mday, instant.tm_mon+1,instant.tm_year,instant.tm_hour,instant.tm_min,instant.tm_sec);
-                if(historique.typeEcran==1){
-                        fprintf(fichier,"Statique");
-                        fprintf(fichier,"%c\n",historique.nomImage);
-                }else if(historique.typeEcran==2){
-                        fprintf(fichier,"Dynamique");
-                        fprintf(fichier,"%d*%d\n",historique.hauteur,historique.longueur)
-                }else if(historique.typeEcran==3){
-                        fprintf(fichier,"Interactif");
-                        fprintf(fichier,"%d*%d\n",positionX, positionY);
+                fprintf(fichier,"%s",s_maintenant);//on stocke le tableau d'heure
+                if(typeEcran==1){// si ecran statique
+                        fprintf(fichier,"1");//on stocke le type d'ecran de veille
+                        fprintf(fichier,"%s\n",argument[1]);// on stocke le nom de l'image
+                }else if(typeEcran==2){
+                        fprintf(fichier,"2");//on stocke le type dynamqiue
+                        fprintf(fichier,"5x3");// on stocke la taille de l'image
+                }else if(typeEcran==3){//  type d'ecran interactif
+                        fprintf(fichier,"3");//on stocke le type
+                        fprintf(fichier,"position initial de l'avion");// on stocke la position initial de l'avion
 
         }
-        fclose(fichier);
+        fclose(fichier);// fermeture du fichier
 }
 
 #endif // HISTORIQUE_H_INCLUDED
