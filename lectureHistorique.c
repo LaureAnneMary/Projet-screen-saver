@@ -21,6 +21,12 @@ void main(){
 		}
 	}
 	if(x==2){
-		printf("je suis désolé, cet partie du programme est en cours de developpement. Reviens plus tard");
+		  FILE* fichier=NULL;
+                int lecteur=0;
+                fichier=fopen("historique.txt","r");
+		system("sort historique.txt");
+                fclose(fichier);
+
+
 	}
 }
