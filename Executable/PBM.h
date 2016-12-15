@@ -13,40 +13,8 @@ struct Pbm // définition de notre structure Pbm
 {
     int largeurImage;   // ces deux int vont stocker la résolution de l'image
     int longueurImage;
-    char* nomImage[100]; // va comporter le nom de notre fichier PBM tiré aléatoirement
+    char nomImage[100][100]; // va comporter le nom de notre fichier PBM tiré aléatoirement
 };
-
-void StatiquechoixAleatoireImage(Pbm* p) // "Pbm* p" est un pointeur sur la structure
-{
-    int nombreAleatoire;
-    int nombreTire;
-
-    srand(time(NULL));      //initialisation de rand
-    nombreAleatoire = rand();    //nombre_aleatoire prend la valeur d'un nombre aleatoire grace a la fonction rand()
-    nombreTire = nombreAleatoire %5;    //on souhaite un nombre aleatoire de 5 valeurs possible, on utilise donc modulo 5
-
-    switch(nombreTire) // on fait un switch pour pouvoir savoir quelle image tirée en fonction du nombre choihi
-    {
-        case 0:
-            strcpy(p->nomImage, "Batman.pbm");
-            break;
-        case 1:
-            strcpy(p->nomImage, "Captainamerica.pbm");
-            break;
-        case 2:
-            strcpy(p->nomImage, "Wonderwoman.pbm");
-            break;
-        case 3:
-            strcpy(p->nomImage, "Greenlantern.pbm");
-            break;
-        case 4:
-            strcpy(p->nomImage, "Xmen.pbm");
-            break;
-        default:
-            printf("Impossible");
-            break;
-    }
-}
 
 void insererImageCentreeDansTableau(char *fichier, Pbm* p, int tableauPourImage[80][24])
 {
@@ -85,7 +53,7 @@ void afficherTableau(int tableauPourImage[80][24]) // fonction qui va afficher n
 {
 	char c[] = {226, 150, 136, 0}; //mettre à caractère blanc
 
-    for (int i = 0 ;i < 24; i++) // boucle qui va commencer par la première colonne puis la deuxième après qu'on ait fini de lire toutes les valeurs de la première colonne
+    for (int i = 0 ;i < 20; i++) // boucle qui va commencer par la première colonne puis la deuxième après qu'on ait fini de lire toutes les valeurs de la première colonne
     {
         for (int j = 0;j < 80; j++) // boucle qui va lire un par un les données de la première ligne du tableau jusqu'à la dernière valeur
         {
@@ -103,5 +71,200 @@ void afficherTableau(int tableauPourImage[80][24]) // fonction qui va afficher n
     printf("\n");
 }
 
+void tableauHorloge(int tableauPourImage[80][24])
+{
+    time_t seconds;
+    struct tm actualTime;
+    FILE* fichier = NULL;
+    char lectureLigne[100] = "";
+    int valeurCase;
+    time(&seconds);
+    actualTime=*localtime(&seconds);
+    //printf("Il est actuellement %.2d:%.2d:%.2d\n", actualTime.tm_hour, actualTime.tm_min, actualTi$
+    int tabHorloge[6] = {0};
+    tableauPourImage[10][1] = 1;
+    tableauPourImage[10][3] = 1;
+    tableauPourImage[22][1] = 1;
+    tableauPourImage[22][3] = 1;
+    tabHorloge[0]=actualTime.tm_hour/10;
+    tabHorloge[1]=actualTime.tm_hour%10;
+    tabHorloge[2]=actualTime.tm_min/10;
+    tabHorloge[3]=actualTime.tm_min%10;
+    tabHorloge[4]=actualTime.tm_sec/10;
+    tabHorloge[5]=actualTime.tm_sec%10;
+    printf("\n");
+    for(int i = 0; i < 6; i++)
+    {
+        switch(tabHorloge[i])
+        {
+        case 0:
+            fichier = fopen("Chiffre0.pbm", "r");
+            for(int a =0; a< 2 ; a++)
+            {
+                fgets(lectureLigne, 71,fichier);
+            }
+            fgets(lectureLigne, 71, fichier);
+            for(int z = 0; z < 5; z++)
+            {
+                for(int k = 0; k < 3; k++)
+                {
+                    fscanf(fichier, "%d", &valeurCase);
+                    tableauPourImage[(i*6)+k][z] = valeurCase;
+                }
+            }
+	    fclose(fichier);
+            break;
+        case 1:
+            fichier = fopen("Chiffre1.pbm", "r");
+            for(int b =0; b< 3 ; b++)
+            {
+                fgets(lectureLigne, 71,fichier);
+            }
+            for(int z = 0; z < 5; z++)
+            {
+                for(int k = 0; k < 3; k++)
+                {
+                    fscanf(fichier, "%d", &valeurCase);
+                    tableauPourImage[(i*6)+k][z] = valeurCase;
+                }
+            }
+            fclose(fichier);
+            break;
+        case 2:
+            fichier = fopen("Chiffre2.pbm", "r");
+            for(int c =0; c< 3 ; c++)
+            {
+                fgets(lectureLigne, 71,fichier);
+            }
+            for(int z = 0; z < 5; z++)
+	    {
+                for(int k = 0; k < 3; k++)
+                {
+                    fscanf(fichier, "%d", &valeurCase);
+                    tableauPourImage[(i*6)+k][z] = valeurCase;
+                }
+            }
+            fclose(fichier);
+            break;
+        case 3:
+            fichier = fopen("Chiffre3.pbm", "r");
+            for(int q =0; q< 3 ; q++)
+            {
+                fgets(lectureLigne, 71,fichier);
+            }
+            for(int z = 0; z < 5; z++)
+            {
+                for(int k = 0; k < 3; k++)
+                {
+                    fscanf(fichier, "%d", &valeurCase);
+                    tableauPourImage[(i*6)+k][z] = valeurCase;
+                }
+            }
+            fclose(fichier);
+            break;
+	 case 4:
+             fichier = fopen("Chiffre4.pbm", "r");
+            for(int e =0; e< 3 ; e++)
+            {
+                fgets(lectureLigne, 71,fichier);
+            }
+            for(int z = 0; z < 5; z++)
+            {
+                for(int k = 0; k < 3; k++)
+                {
+                    fscanf(fichier, "%d", &valeurCase);
+                    tableauPourImage[(i*6)+k][z] = valeurCase;
+                }
+            }
+            fclose(fichier);
+            break;
+        case 5:
+            fichier = fopen("Chiffre5.pbm", "r");
+            for(int f =0; f< 3 ; f++)
+            {
+                fgets(lectureLigne, 71,fichier);
+            }
+            for(int z = 0; z < 5; z++)
+            {
+                for(int k = 0; k < 3; k++)
+                {
+                    fscanf(fichier, "%d", &valeurCase);
+                    tableauPourImage[(i*6)+k][z] = valeurCase;
+                }
+            }
+            fclose(fichier);
+            break;
+        case 6:
+            fichier = fopen("Chiffre6.pbm", "r");
+            for(int g =0; g< 3 ; g++)
+            {
+                fgets(lectureLigne, 71,fichier);
+            }
+            for(int z = 0; z < 5; z++)
+            {
+                for(int k = 0; k < 3; k++)
+                {
+                    fscanf(fichier, "%d", &valeurCase);
+                    tableauPourImage[(i*6)+k][z] = valeurCase;
+                }
+            }
+            fclose(fichier);
+            break;
+        case 7:
+            fichier = fopen("Chiffre7.pbm", "r");
+            for(int h =0; h< 3 ; h++)
+            {
+                fgets(lectureLigne, 71,fichier);
+            }
+            for(int z = 0; z < 5; z++)
+            {
+                for(int k = 0; k < 3; k++)
+                {
+                    fscanf(fichier, "%d", &valeurCase);
+                    tableauPourImage[(i*6)+k][z] = valeurCase;
+                }
+            }
+            fclose(fichier);
+            break;
+        case 8:
+            fichier = fopen("Chiffre8.pbm", "r");
+            for(int l =0; l< 3 ; l++)
+            {
+                fgets(lectureLigne, 71,fichier);
+            }
+            for(int z = 0; z < 5; z++)
+            {
+                for(int k = 0; k < 3; k++)
+                {
+                    fscanf(fichier, "%d", &valeurCase);
+		    tableauPourImage[(i*6)+k][z] = valeurCase;
+                }
+            }
+            fclose(fichier);
+            break;
+        case 9:
+            fichier = fopen("Chiffre9.pbm", "r");
+            for(int m =0; m< 3 ; m++)
+            {
+                fgets(lectureLigne, 71,fichier);
+            }
+            for(int z = 0; z < 5; z++)
+            {
+                for(int k = 0; k < 3; k++)
+                {
+                    fscanf(fichier, "%d", &valeurCase);
+                    tableauPourImage[(i*6)+k][z] = valeurCase;
+                }
+            }
+            fclose(fichier);
+            break;
+        default:
+            exit(2);
+            break;
+        }
+    }
+}
+
 
 #endif // PBM_H_INCLUDED
+
