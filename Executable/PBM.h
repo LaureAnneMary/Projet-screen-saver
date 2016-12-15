@@ -13,8 +13,8 @@ struct Pbm // définition de notre structure Pbm
 {
     int largeurImage;   // ces deux int vont stocker la résolution de l'image
     int longueurImage;
-    char nomImage[100]; // va comporter le nom de notre fichier PBM tiré aléatoirement
-}
+    char* nomImage[100]; // va comporter le nom de notre fichier PBM tiré aléatoirement
+};
 
 void StatiquechoixAleatoireImage(Pbm* p) // "Pbm* p" est un pointeur sur la structure
 {
