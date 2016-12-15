@@ -11,7 +11,7 @@ void processusfils()
 {
     int j;
     char *nomImage;
-    int n=2;
+    int n;
     int i;
     char* str;
     char chemin_executable[1024];//declaration de deux tableaux de caractères
@@ -31,7 +31,7 @@ void processusfils()
         	}
         	else
         	{
-       			 getcwd(chemin_pbm, 1024); //sinon on donne autre chose(a rechercher)
+       			 getcwd(chemin_pbm, 1024); //sinon on donne le chemin du repertoire courant
     		}
     		DIR* ouvrir_pbm;//pointeur
     		ouvrir_pbm=opendir(chemin_pbm);//le pointeur va pointer vers le premier fichier du repertoire
@@ -63,20 +63,20 @@ void processusfils()
         case 2:
             j=0;
             sauvegarde(n,j );
-            str=getenv("EXIASAVER_HOME");
-            if (str!=NULL)
+            str=getenv("EXIASAVER_HOME");//on prend le chemin vers le repertoire Executable
+            if (str!=NULL)//lorsqu'on arrive a avoir le chemin
             {
-                strcpy(chemin_executable,str);
+                strcpy(chemin_executable,str);//on stocke le chemin dans la variable chemin_executable
             }
             else
             {
-                getcwd(chemin_executable,1024);
+                getcwd(chemin_executable,1024);// en car de beuge, il s'agit d'une securité qui met dans le variable chemin_executable le chemin du repertoire courant 
             }
-            strcat(chemin_executable,"ecranDynamique");
-            execl(chemin_executable,"",NULL);
+            strcat(chemin_executable,"ecranDynamique");// a la suite de l'addresse vers le repertoire Executable, on percis que l'on va jusqu'a l'ecran dynamique
+            execl(chemin_executable,"",NULL);//on execute le progarmme ecranDynamique
             printf("je suis l'ecran dynamique\n");
             break;
-        case 3:
+        case 3:// execution de l'ecran interactif qui n'a pas été totalement programmé
             j=0;
             sauvegarde(n,j);
             //execl("ecranInteractif","",NULL);
@@ -88,18 +88,18 @@ void processusfils()
 
 int main(int argc, char *argv[])
 {
-    system("clear");
-    if(argc==2)
+    system("clear");// on efface tous ce qu'il y a sur le console 
+    if(argc==2)// si le Lanceur reçoit un parametre 
     {
-	if(strcmp(argv[1],"-stat")==0){
-		int pid=fork();
+	if(strcmp(argv[1],"-stat")==0){//on verifie que la paramètre reçu est bien 
+		int pid=fork();//on crée un processus fils
 		switch(pid){
 		case -1:
 			printf("Erreur lors de la création du processus fils\n");
 			break;
 		case 0:
 			printf("Je suis le lecteur de l'historique\n");
-			execl("lectureHistorique","",NULL);
+			execl("lectureHistorique","",NULL);// execution du Lecture de l'historique
 		}
         }
     }
@@ -112,7 +112,7 @@ int main(int argc, char *argv[])
             printf("Erreur lors de la création");
             break;
         case 0:
-            processusfils();
+            processusfils();// appel a la fonction processus fils
             break;
         }
     }
