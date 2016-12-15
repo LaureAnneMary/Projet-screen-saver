@@ -18,36 +18,5 @@ int commandeClavier(void){
     return touche; // la fonction renvoie la touche appuyée sur le clavier
 }
 
-int fonctionArret(){
-    int touche;
-    while(1){
-        touche = commandeClavier();
-        if(touche == 32){ // 32 : touche espace
-            printf("C'est la touche %d \n", touche);
-            system("kill");
-        } else{
-            touche = commandeClavier();
-        }
-    }
-    return 0;
-}
-
-int commandesFleches(){
-    int a, b, c;
-    while(1){
-    a = commandeClavier();
-    printf("%d", a);
-        if(a == 27){
-            b = commandeClavier();
-            printf(", %d", b);
-            if(b == 91){
-                c = commandeClavier();
-                printf( "et %d", c);
-            }
-        }
-    }
-    return 0;
-}
-
 
 #endif // COMMANDES_H_INCLUDED
