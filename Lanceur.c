@@ -15,8 +15,8 @@ void processusfils()
     int i;
     char* str;
     char chemin_executable[1024];//declaration de deux tableaux de caractères
-   // srand(time(NULL));
-   // n=rand()%3+1;
+    srand(time(NULL));
+    n=rand()%3+1;
     srand(time(NULL));
     j=rand()%5+1;//tirage aléatoire d'un nombre entre 1 et 5
     char chemin_pbm[1024];
@@ -63,7 +63,7 @@ void processusfils()
         case 2:
             j=0;
             sauvegarde(n,j );
-            str=getenv("EXIASAVER_HOME");
+   /*         str=getenv("EXIASAVER_HOME");
             if (str!=NULL)
             {
                 strcpy(chemin_executable,str);
@@ -73,8 +73,8 @@ void processusfils()
                 getcwd(chemin_executable,1024);
             }
             strcat(chemin_executable,"/ecranDynamique");
-            execl(chemin_executable,"",NULL);
-            // printf("je suis l'ecran dynamique\n");
+            execl(chemin_executable,"",NULL);*/
+             printf("je suis l'ecran dynamique\n");
             break;
         case 3:
             j=0;
@@ -91,9 +91,16 @@ int main(int argc, char *argv[])
     system("clear");
     if(argc==2)
     {
-        if(strcmp(argv[1],"-stats")==0)
-        {
-            execl("lectureHistorique","",NULL);
+	if(strcmp(argv[1],"-stat")==0){
+		int pid=fork();
+		switch(pid){
+		case -1:
+			printf("Erreur lors de la création du processus fils\n");
+			break;
+		case 0:
+			printf("Je suis le lecteur de l'historique\n");
+			execl("lectureHistorique","",NULL);
+		}
         }
     }
     else
