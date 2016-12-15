@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1481548897 source:/home/vincent/projetSS/Gestion du temps/main.c
+	<stdio.h>
+	<time.h>
+
