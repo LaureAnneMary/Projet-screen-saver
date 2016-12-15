@@ -11,7 +11,7 @@ void processusfils()
 {
     int j;
     char *nomImage;
-    int n=1;
+    int n=2;
     int i;
     char* str;
     char chemin_executable[1024];//declaration de deux tableaux de caractères
@@ -63,7 +63,7 @@ void processusfils()
         case 2:
             j=0;
             sauvegarde(n,j );
-   /*         str=getenv("EXIASAVER_HOME");
+            str=getenv("EXIASAVER_HOME");
             if (str!=NULL)
             {
                 strcpy(chemin_executable,str);
@@ -72,9 +72,9 @@ void processusfils()
             {
                 getcwd(chemin_executable,1024);
             }
-            strcat(chemin_executable,"/ecranDynamique");
-            execl(chemin_executable,"",NULL);*/
-             printf("je suis l'ecran dynamique\n");
+            strcat(chemin_executable,"ecranDynamique");
+            execl(chemin_executable,"",NULL);
+            printf("je suis l'ecran dynamique\n");
             break;
         case 3:
             j=0;
