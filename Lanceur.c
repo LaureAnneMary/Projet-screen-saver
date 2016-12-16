@@ -55,15 +55,13 @@ void processusfils()
 
             	char* argument[]= {"ecranStatique",imagePBM->d_name,NULL}; // dans un tableau de caractère je met le type d'ecran de veille lancer ainsi que le nom de fichier pbm a ouvr$
             	strcat(chemin_executable, "ecranStatique");//on copie a la suite du chemin que contient deja le tableau /ecranStatique
-       	
 	     	execv(chemin_executable,argument);// on execute le programme ecranStatique en envoyant en paramètre le chemin vers le fichier a executer avec des paramètres notamment le nom$
 
             	sauvegarde (n,j);//fonction qui ecrit dans l'historique
             break;
         case 2:
-            j=0;
-            sauvegarde(n,j );
-            str=getenv("EXIASAVER_HOME");//on prend le chemin vers le repertoire Executable
+	    printf("je suis l'ecran dynamique\n");
+           /* str=getenv("EXIASAVER_HOME");//on prend le chemin vers le repertoire Executable
             if (str!=NULL)//lorsqu'on arrive a avoir le chemin
             {
                 strcpy(chemin_executable,str);//on stocke le chemin dans la variable chemin_executable
@@ -73,16 +71,27 @@ void processusfils()
                 getcwd(chemin_executable,1024);// en car de beuge, il s'agit d'une securité qui met dans le variable chemin_executable le chemin du repertoire courant 
             }
             strcat(chemin_executable,"ecranDynamique");// a la suite de l'addresse vers le repertoire Executable, on percis que l'on va jusqu'a l'ecran dynamique
-            execl(chemin_executable,"",NULL);//on execute le progarmme ecranDynamique
-            printf("je suis l'ecran dynamique\n");
+            execl(chemin_executable,"",NULL);//on execute le progarmme ecranDynamique*/
+	    execl("ecranDynamique","",NULL);
+	    j=0;
+	    sauvegarde(n,j);
             break;
         case 3:// execution de l'ecran interactif qui n'a pas été totalement programmé
-            j=0;
-            sauvegarde(n,j);
-            //execl("ecranInteractif","",NULL);
             printf("je suis l'ecran interactif\n");
+            j=0;
+	  /*  str=getenv("EXIASAVER_HOME");
+	    if(str!=NULL){
+		strcy(chemin_executable,str);
+	    }else{
+		getcwd(chemin_executable,1024);
+	    }
+	    strcat(chemin_executable,"interactif");
+            execl(chemin_executable,"",NULL);*/
+            sauvegarde(n,j);
             break;
-        }
+        default :
+		printf("Aucun écran de veille n'a pu être charger \n");
+	}
 }
 
 
@@ -105,7 +114,7 @@ int main(int argc, char *argv[])
     }
     else
     {
-        int pid=fork();
+        int pid=fork();//création d'un processus fils pour pouvoir executer un programme a partir de celui-ci
         switch(pid)
         {
         case -1:
@@ -114,7 +123,7 @@ int main(int argc, char *argv[])
         case 0:
             processusfils();// appel a la fonction processus fils
             break;
-        }
+       }
     }
     return 0;
 }
