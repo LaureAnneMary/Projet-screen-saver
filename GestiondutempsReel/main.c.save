@@ -1,0 +1,74 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include <string.h>
+#include <unistd.h>
+#include "PBM.h"
+
+void AfficherPBM(Pbm image)
+{
+FILE* fichier = NULL; // notre "FILE*" permet de récupérer le pointeur du fichier po$
+
+                 fichier = fopen(image.nomImage, "r"); // on ouvre le fichier qui est contenu dans$
+
+                         if(fichier != NULL) // peremt de s'assurer que le fichier s'est bien ouvert
+                         {
+         
+                                lireResolution(fichier, &image); // cette fonction va permettre de s$
+         
+                                insererImageCentreeDansTableau(fichier, &image, tableauPourImage); /$
+                                fclose(fichier); 
+                        }
+                        else
+                        {
+                                printf("Impossible");
+                        } 
+}
+
+int main(void)
+{
+    time_t secondes;
+    struct tm instant;
+
+    time(&secondes);
+    instant=*localtime(&secondes);
+
+    printf("%d:%d:%d\n", instant.tm_hour, instant.tm_min, instant.tm_sec);
+    int horloge[3];
+    horloge[0] = instant.tm_hour;
+    horloge[1] = instant.tm_min;
+    horloge[2] = instant.tm_sec;
+   /*printf("%d\n", horloge[0]);
+    printf("%d\n", horloge[1]);
+    printf("%d\n", horloge[2]);*/
+	int i; 
+	char* tabhoraire[11] = {"Chiffre 0.pbm", "Chiffre 1.pbm", "Chiffre 2.pbm", "Chiffre 3.pbm", "Chiffre 4.pbm", "Chiffre 5.pbm", "Chiffre 6.pbm", "Chiffre 7.pbm", "Chiffre 8.pbm", "Chiffre 9.pbm", "Deuxpoints.pbm"};
+for (i = 0; i < 3; i++)
+{
+        int nombre1 = (horloge[i]/10) %10;
+        int nombre2 = (horloge[i]-nombre1*10) %10;
+        Pbm pbm1 ={3, 5, FILE* fichier = NULL; // notre "FILE*" permet de récupérer le pointeur du fichier po$
+
+                 fichier = fopen("Deuxpoints.pbm", "r"); // on ouvre le fichier qui est contenu dans$
+
+                         if(fichier != NULL) // peremt de s'assurer que le fichier s'est bien ouvert
+                         {
+         
+                                lireResolution(fichier, &image); // cette fonction va permettre de s$
+         
+                                insererImageCentreeDansTableau(fichier, &image, tableauPourImage); /$
+                                fclose(fichier); 
+                        }
+                        else
+                        {
+                        tabhoraire[nombre1]};
+//	Pbm pbm2 = tabhoraire[nombre2];
+	if(i <2)
+	{
+	AfficherPBM(pbm1)
+	}
+}
+
+    return 0;
+
+}
